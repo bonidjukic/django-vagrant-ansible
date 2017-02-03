@@ -1,0 +1,16 @@
+description "uwsgi configuration for {{ uwsgi_app_name }}"
+start on runlevel [2345]
+stop on runlevel [06]
+
+kill timeout 5
+
+respawn
+respawn limit 15 5
+
+post-stop exec sleep 5
+
+chdir {{ uwsgi_app_path }}
+
+script
+    {{ uwsgi_app_env }} {{ uwsgi_virtualenv_path }}/bin/uwsgi --master --processes {{ uwsgi_num_processes }} --die-on-term --socket :{{ uwsgi_app_port }} --wsgi {{ uwsgi_app_module }} --uid {{ uwsgi_user }} --pidfile /var/run/{{ uwsgi_app_name }}_uwsgi.pid
+end script

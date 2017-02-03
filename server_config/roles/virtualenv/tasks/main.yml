@@ -1,0 +1,6 @@
+---
+- name: Install pip
+  apt: pkg=python3-pip state=latest
+
+- name: Install virtualenv
+  shell: pip3 install --upgrade virtualenv

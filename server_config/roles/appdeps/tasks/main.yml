@@ -1,0 +1,54 @@
+---
+- name: Update apt-get
+  shell: apt-get clean
+
+- name: Update apt-get
+  shell: apt-get update
+
+- name: Install build-essential
+  apt: pkg=build-essential state=latest
+
+- name: Install libpq-dev
+  apt: pkg=libpq-dev state=latest
+
+- name: Install python3-dev
+  apt: pkg=python3-dev state=latest
+
+- name: Install python-dev
+  apt: pkg=python-dev state=latest
+
+- name: Install geospatial libraries (binutils)
+  apt: pkg=binutils state=latest
+
+- name: Install geospatial libraries (libproj)
+  apt: pkg=libproj-dev state=latest
+
+- name: Install geospatial libraries (gdal-bin)
+  apt: pkg=gdal-bin state=latest
+
+- name: Install memcached
+  apt: pkg=memcached state=latest
+
+- name: Install libjpeg62
+  apt: pkg=libjpeg62 state=latest
+
+- name: Install libjpeg62-dev
+  apt: pkg=libjpeg62-dev state=latest
+
+- name: Install gettext
+  apt: pkg=gettext state=latest
+
+- name: Install zlib1g-dev
+  apt: pkg=zlib1g-dev state=latest
+
+- name: Install libz-dev
+  apt: pkg=libz-dev state=latest
+
+- name: Install libjpeg-dev
+  apt: pkg=libjpeg-dev state=latest
+
+- name: Install libfreetype6-dev
+  apt: pkg=libfreetype6-dev state=latest
+
+- name: Install libcurl4-openssl-dev
+  apt: pkg=libcurl4-openssl-dev state=latest

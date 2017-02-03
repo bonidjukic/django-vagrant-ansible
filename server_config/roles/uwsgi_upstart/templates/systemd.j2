@@ -1,0 +1,14 @@
+[Unit]
+Description=uwsgi configuration for {{ uwsgi_app_name }}
+
+[Service]
+Type=simple
+Environment={{ uwsgi_app_env }}
+WorkingDirectory={{ uwsgi_app_path }}
+Restart=always
+RestartSec=5
+TimeoutStopSec=5
+ExecStart={{ uwsgi_virtualenv_path }}/bin/uwsgi --master --processes {{ uwsgi_num_processes }} --die-on-term --socket :{{ uwsgi_app_port }} --wsgi {{ uwsgi_app_module }} --uid {{ uwsgi_user }} --pidfile /var/run/{{ uwsgi_app_name }}_uwsgi.pid --logto /tmp/{{ uwsgi_app_name }}_uwsgi_error.log
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+---
+- name: Initialize virtualenv
+  sudo: no
+  shell: cd /vagrant && virtualenv --no-site-packages --python=python3 .
+
+- name: Install pip Requirements
+  sudo: no
+  pip: requirements=/vagrant/requirements.txt virtualenv=/vagrant

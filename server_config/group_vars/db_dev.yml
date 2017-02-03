@@ -1,0 +1,14 @@
+---
+ansible_ssh_user: vagrant
+
+postgresql_listen_addresses:
+  - localhost
+  - 192.168.103.101
+
+postgresql_pg_hba_default:
+  - { type: local, database: all, user: '{{ postgresql_admin_user }}', address: '', method: '{{ postgresql_default_auth_method }}', comment: '' }
+  - { type: local, database: all, user: all, address: '',             method: '{{ postgresql_default_auth_method }}', comment: '"local" is for Unix domain socket connections only' }
+  - { type: host,  database: all, user: all, address: '127.0.0.1/32', method: '{{ postgresql_default_auth_method }}', comment: 'IPv4 local connections:' }
+  - { type: host,  database: all, user: all, address: '::1/128',      method: '{{ postgresql_default_auth_method }}', comment: 'IPv6 local connections:' }
+  - { type: host,  database: all, user: all, address: '192.168.103.1/32',      method: '{{ postgresql_default_auth_method }}', comment: 'host' }
+  - { type: host,  database: all, user: all, address: '192.168.103.100/32',      method: '{{ postgresql_default_auth_method }}', comment: 'app' }

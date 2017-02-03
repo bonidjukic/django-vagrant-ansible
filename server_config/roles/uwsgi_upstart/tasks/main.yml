@@ -1,0 +1,12 @@
+---
+- name: Install uwsgi
+  sudo: no
+  pip: name=uwsgi version=2.0.11.2 virtualenv={{ uwsgi_virtualenv_path }}
+
+- name: Configure uwsgi Upstart
+  sudo: yes
+  template: dest="/etc/init/{{ uwsgi_app_name }}_uwsgi.conf" src=upstart.j2 mode=0644
+
+- name: Configure uwsgi systemd
+  sudo: yes
+  template: dest="/lib/systemd/system/{{ uwsgi_app_name }}_uwsgi.service" src=systemd.j2 mode=0644

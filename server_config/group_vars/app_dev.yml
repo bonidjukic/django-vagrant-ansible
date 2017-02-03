@@ -1,0 +1,10 @@
+---
+app_hostname: app.django-vagrant-ansible.lh
+uwsgi_virtualenv_path: /vagrant
+uwsgi_num_processes: 4
+uwsgi_user: vagrant
+uwsgi_app_module: "django_vagrant_ansible.wsgi:application"
+uwsgi_app_path: /vagrant/django_vagrant_ansible
+uwsgi_app_name: django_vagrant_ansible
+uwsgi_app_port: 5000
+uwsgi_app_env: PRODUCTION_MODE=true

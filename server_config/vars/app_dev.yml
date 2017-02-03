@@ -1,0 +1,28 @@
+---
+nginx_user: "www-data"
+nginx_sites:
+  django_vagrant_ansible:
+    - listen 80
+    - server_name {{ app_hostname }}
+    - gzip on
+    - gzip_disable msie6
+    - gzip_types text/plain application/x-javascript text/xml text/css
+    - client_max_body_size 500M
+    - location / {
+        include uwsgi_params;
+        uwsgi_pass 127.0.0.1:{{ uwsgi_app_port }};
+      }
+    - location /media  {
+        alias {{ uwsgi_app_path }}/django_vagrant_ansible/media;
+      }
+    - location /static {
+        alias {{ uwsgi_app_path }}/static;
+      }
+
+nginx_configs:
+  proxy:
+    - proxy_set_header X-Real-IP  $remote_addr
+    - proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for
+  gzip:
+    - gzip on
+    - gzip_disable msie6

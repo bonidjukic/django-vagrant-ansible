@@ -1,0 +1,26 @@
+---
+postgresql_version: 9.5
+postgresql_encoding: 'UTF-8'
+postgresql_locale: 'en_US.UTF-8'
+postgresql_ext_install_postgis: yes
+postgresql_ext_postgis_version: 2.2
+
+postgresql_databases:
+  - name: django_vagrant_ansible
+    gis: yes
+
+postgresql_database_extensions:
+  - db: django_vagrant_ansible
+    extensions:
+      - postgis
+
+postgresql_users:
+  - name: django_vagrant_ansible
+    pass: django_vagrant_ansible
+    encrypted: no
+
+postgresql_user_privileges:
+  - name: django_vagrant_ansible
+    db: django_vagrant_ansible
+    priv: "ALL"
+    role_attr_flags: "CREATEDB"

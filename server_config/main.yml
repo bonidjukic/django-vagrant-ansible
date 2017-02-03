@@ -1,0 +1,56 @@
+---
+- hosts:
+    - db_dev
+  user: vagrant
+  sudo: yes
+
+  roles:
+    - lborguetti.system-locale
+    - environment_locale
+    - ANXS.postgresql
+
+  vars_files:
+    - vars/db.yml
+
+- hosts:
+    - db_prod
+  user: vagrant
+  sudo: yes
+
+  roles:
+    - lborguetti.system-locale
+    - environment_locale
+    - ANXS.postgresql
+
+  vars_files:
+    - vars/db.yml
+
+- hosts:
+    - app_dev
+  user: vagrant
+  sudo: yes
+
+  roles:
+    - appdeps
+    - virtualenv
+    - python
+    - uwsgi_upstart
+    - jdauphant.nginx
+
+  vars_files:
+    - vars/app_dev.yml
+
+- hosts:
+    - app_prod
+  user: vagrant
+  sudo: yes
+
+  roles:
+    - appdeps
+    - virtualenv
+    - python
+    - uwsgi_upstart
+    - jdauphant.nginx
+
+  vars_files:
+    - vars/app_prod.yml
