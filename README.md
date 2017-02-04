@@ -24,8 +24,9 @@ Environment will include two virtual machines:
 * `ssh-add .vagrant/machines/db/virtualbox/private_key`
 
 #  Install required Ansible packages
-`ansible-galaxy install ANXS.postgresql`
-`ansible-galaxy install lborguetti.system-locale`
+
+* `ansible-galaxy install ANXS.postgresql`
+* `ansible-galaxy install lborguetti.system-locale`
 
 # Provision the virtual machines with Ansible
 * `cd server_config`
@@ -34,9 +35,9 @@ Environment will include two virtual machines:
 
 # That's it
 Basic skeleton development environment has been set up.
-See the next section for optional next steps.
+There are some optional next steps listed in the following section.
 
-# Next steps
+# Setting up Django project
 You might want to continue with setting up django environment now:
 
 * connect to your virtual machine: `vagrant ssh app`
@@ -58,7 +59,7 @@ This usually happens where you create multiple vagrant instances, the solution s
 
 to list all identities and confirm that there are more than one identities for vagrant `db` and `app` virtual machines.
 If this is the case:
-* run `ssh-add -D` to remove all identities from the agent
+* run `ssh-add -D` to __remove all identities__ from the agent (__Do this only if you know what you're doing!__)
 * change directory to the root of the project
 * `ssh-add .vagrant/machines/db/virtualbox/private_key` (re-add `db` private key)
 * `ssh-add .vagrant/machines/app/virtualbox/private_key` (re-add `app` private key)
@@ -66,8 +67,15 @@ If this is the case:
 
 ### "No package match libgeos-c1 is available" when provisioning `db` virtual machine
 
-* edit `/etc/ansible/roles/ANXS.postgresql/tasks/extensions/postgis.yml` file (sudo)
+* edit `/etc/ansible/roles/ANXS.postgresql/tasks/extensions/postgis.yml` file (you will probably need to edit this file with superuser privileges, i.e. `sudo`)
 * replace `- libgeos-c1` with `- libgeos-c1v5`
 * replace `- "postgresql-{{postgresql_version}}-postgis-{{postgresql_ext_postgis_version}}-scripts"` with `- "postgresql-{{postgresql_version}}-postgis-scripts"`
 
 see: https://github.com/ANXS/postgresql/issues/159
+
+## Tips and tricks
+
+You may want to try using the verbose option by adding `-vvvv` when provisioning with Ansible:
+
+* `ansible-playbook -i inventory.ini main.yml -l db_dev -vvvv`
+* `ansible-playbook -i inventory.ini main.yml -l app_dev -vvvv`
