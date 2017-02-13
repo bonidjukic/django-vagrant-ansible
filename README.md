@@ -53,6 +53,12 @@ You might want to continue with setting up django environment now:
 
 ## Possible issues
 
+### "unreachable: true", "Host key verification failed"
+Try with:
+
+* `ssh-keygen -f "~/.ssh/known_hosts" -R 192.168.103.101`
+* `ssh-keygen -f "~/.ssh/known_hosts" -R 192.168.103.100`
+
 ### "unreachable=1", "Failed to connect to the host via ssh", "Connection timed out"
 This usually happens where you create multiple vagrant instances, the solution should be easy:
 * run `ssh-add -l`
